@@ -1,4 +1,6 @@
-    $('.form_send_bt').on('click',function()
+jQuery(function ($) 
+{
+	$('.form_send_bt').on('click',function()
     {
         var $form     = $(this).closest('form');
         var form_id   = $form.attr('id');
@@ -44,3 +46,32 @@
                   });
               }
     });
+});
+
+
+
+//function notifications
+  function Notificacao(tipo, titulo, mensagem)
+  {
+
+    toastr.options = {
+      "closeButton": true,
+      "debug": false,
+      "newestOnTop": true,
+      "progressBar": true,
+      "positionClass": "toast-top-right",
+      "preventDuplicates": false,
+      "onclick": null,
+      "showDuration": "300",
+      "hideDuration": "1000",
+      "timeOut": "3000",
+      "extendedTimeOut": "1000",
+      "showEasing": "swing",
+      "hideEasing": "linear",
+      "showMethod": "fadeIn",
+      "hideMethod": "fadeOut"
+    }
+    
+    toastr[tipo](mensagem, titulo);
+    
+  }
