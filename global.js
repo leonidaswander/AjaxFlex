@@ -1,7 +1,6 @@
 jQuery(function ($) 
 {
-	$('.form_send_bt').on('click',function()
-    {
+  $('body').on('click', '.form_send_bt', function (){
         var $form     = $(this).closest('form');
         var form_id   = $form.attr('id');
         var form_url  = $form.attr('action');
@@ -18,42 +17,39 @@ jQuery(function ($)
                   var obrigatorio   = input_id.attr('required');
                   var mensagem      = input_id.attr('required_message');
 
-                  if ( (obrigatorio != undefined) && (input_id.val()=="" ) )
-                  {
+                  if ( (obrigatorio != undefined) && (input_id.val()=="" ) ){
                       Notificacao('error',mensagem,'Campo obrigatório'); 
                       input_id.focus();
                       erros = 1;
                   }
               });
-
-              if(erros == 0)
-              {
-                  $.ajax({
-                    type: "POST",
-                    url: form_url,
-                    data: dados,
-                    success: function( data )
-                    {
-                        if(tipo_retorno=='erro')
-                        {
-                          Notificacao('error',mensagem_retorno,'Houve algo de errado'); 
-                        }
-                        else
-                        {
-                          Notificacao('success',mensagem_retorno,'Tudo certo');
-                        }
-                    }
-                  });
-              }
+                if(erros == 0)
+                {
+                    $.ajax({
+                      type: "POST",
+                      url: form_url,
+                      data: dados,
+                      success: function( data )
+                      {
+                          if(tipo_retorno=='erro')
+                          {
+                            Notification('error',mensagem_retorno,'Houve algo de errado'); 
+                          }
+                          else
+                          {
+                            Notification('success',mensagem_retorno,'Tudo certo');
+                          }
+                      }
+                    });
+                }
     });
 });
 
 
 
 //function notifications
-  function Notificacao(tipo, titulo, mensagem)
+  function Notification(typeToastr, title, message)
   {
-
     toastr.options = {
       "closeButton": true,
       "debug": false,
@@ -72,6 +68,6 @@ jQuery(function ($)
       "hideMethod": "fadeOut"
     }
     
-    toastr[tipo](mensagem, titulo);
+    toastr[typeToastr](message, title);
     
   }
